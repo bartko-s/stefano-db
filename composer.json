@@ -1,0 +1,39 @@
+{
+    "name": "stefano/stefano-db",
+    "description": "Modul for Zend Framework 2",
+    "version": "1.0.0",
+    "license": "BSD-3-Clause",
+    "type": "zf-module",
+    "keywords": [
+        "zf-module",
+        "Db Transaction",
+        "Lock-Table"
+    ],
+    "support": {
+        "source": "https://github.com/bartko-s/stefano-db",
+        "issues": "https://github.com/bartko-s/stefano-db/issues"
+    },
+    "homepage": "https://github.com/bartko-s/stefano-db",
+    "authors": [
+        {
+            "name": "Stefan Bartko"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "zendframework/zendframework": ">=2.0.0"
+    },
+    "require-dev": {
+        "phpunit/PHPUnit": ">=3.7.0",
+        "phpunit/dbunit": ">=1.0.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "StefanoDb\\": "src/",
+            "StefanoDbTest\\": "tests/"
+        },
+        "classmap": [
+            "./src/"
+        ]
+    }
+}
