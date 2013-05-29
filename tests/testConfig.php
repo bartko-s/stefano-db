@@ -1,4 +1,7 @@
 <?php
+//Mock only existend method
+\Mockery::getConfiguration()->allowMockingNonExistentMethods(false);
+
 /**
  * DB connection settings
  */
