@@ -2,26 +2,21 @@
 namespace StefanoDb\Transaction;
 
 use StefanoDb\Transaction\Transaction as Transaction;
-use Zend\Db\Adapter\Adapter;
+use StefanoDb\Transaction\TransactionManagerInterface;
+use Zend\Db\Adapter\AdapterInterface;
 
 class TransactionManager
+    implements TransactionManagerInterface
 {
-    static private $transactions = array();
+    private $transactions = array();
     
-    /**
-     * Return new instance if Transaction object does not exist for given db adapter
-     * otherwise return existent object
-     * 
-     * @param \Zend\Db\Adapter\Adapter $dbAdapter
-     * @return \StefanoDb\Transaction\Transaction
-     */
-    static function getTransaction(Adapter $dbAdapter) {
+    public function getTransaction(AdapterInterface $dbAdapter) {
         $dbAdapterId = spl_object_hash($dbAdapter);
         
-        if(!array_key_exists($dbAdapterId, self::$transactions)) {
-            self::$transactions[$dbAdapterId] = new Transaction($dbAdapter);
+        if(!array_key_exists($dbAdapterId, $this->transactions)) {
+            $this->transactions[$dbAdapterId] = new Transaction($dbAdapter);
         }
         
-        return self::$transactions[$dbAdapterId];
+        return $this->transactions[$dbAdapterId];
     }
 }

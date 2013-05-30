@@ -1,52 +1,36 @@
 <?php
 namespace StefanoDbTest\Transaction;
 
-use \StefanoDb\Transaction\TransactionManager;
-use \Zend\Db\Adapter\Adapter;
+use StefanoDb\Transaction\TransactionManager;
 
 class TransactionManagerTest
     extends \PHPUnit_Framework_TestCase
-{
-    private $dbAdapter;
-    
-    private $dbAdapter2;
-
-    protected function setUp() {
-        $this->dbAdapter = new Adapter(array(
-            'driver' => 'Pdo_' . ucfirst(TEST_STEFANO_DB_ADAPTER),
-            'hostname' => TEST_STEFANO_DB_HOSTNAME,
-            'database' => TEST_STEFANO_DB_DB_NAME,
-            'username' => TEST_STEFANO_DB_USER,
-            'password' => TEST_STEFANO_DB_PASSWORD
-        ));
+{   
+    public function testCanGetTransactionInstance() {
+        $dbAdapterStub = \Mockery::mock('\Zend\Db\Adapter\AdapterInterface');
         
-        $this->dbAdapter2 = new Adapter(array(
-            'driver' => 'Pdo_' . ucfirst(TEST_STEFANO_DB_ADAPTER),
-            'hostname' => TEST_STEFANO_DB_HOSTNAME,
-            'database' => TEST_STEFANO_DB_DB_NAME,
-            'username' => TEST_STEFANO_DB_USER,
-            'password' => TEST_STEFANO_DB_PASSWORD
-        ));
+        $transactionManager = new TransactionManager();
+        $transaction = $transactionManager->getTransaction($dbAdapterStub);
         
-        
+        $this->assertInstanceOf('\StefanoDb\Transaction\TransactionInterface', $transaction);
     }
     
-    protected function tearDown() {
-        $this->dbAdapter = null;
+    public function testGetSameTransactionObjectForSameDbAdapter() {
+        $dbAdapterStub = \Mockery::mock('\Zend\Db\Adapter\AdapterInterface');
         
-        $this->dbAdapter2 = null;
+        $transactionManager = new TransactionManager();
+        $this->assertSame($transactionManager->getTransaction($dbAdapterStub),
+                $transactionManager->getTransaction($dbAdapterStub));
     }
     
-    public function testGetTransaction() {
-        $this->assertInstanceOf('\StefanoDb\Transaction\Transaction',
-                TransactionManager::getTransaction($this->dbAdapter));
+    public function testCanManageMuchTransactionInstance() {
+        $dbAdapterStub1 = \Mockery::mock('\Zend\Db\Adapter\AdapterInterface');
+        $dbAdapterStub2 = \Mockery::mock('\Zend\Db\Adapter\AdapterInterface');
         
-        $transaction1 = TransactionManager::getTransaction($this->dbAdapter);
-        $transaction2 = TransactionManager::getTransaction($this->dbAdapter2);
-        $this->assertNotSame($transaction1, $transaction2, 'Must not be same instance');
+        $transactionManager = new TransactionManager();
+        $transaction1 = $transactionManager->getTransaction($dbAdapterStub1);
+        $transaction2 = $transactionManager->getTransaction($dbAdapterStub2);
         
-        $transaction3 = TransactionManager::getTransaction($this->dbAdapter);
-        $transaction4 = TransactionManager::getTransaction($this->dbAdapter);
-        $this->assertSame($transaction3, $transaction4, 'Must be same instance');        
+        $this->assertNotSame($transaction1, $transaction2);
     }
 }
