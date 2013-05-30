@@ -1,5 +1,5 @@
 <?php
-namespace StefanoDbTest;
+namespace StefanoDbTest\Transaction;
 
 use \StefanoDb\Transaction\TransactionManager;
 use \Zend\Db\Adapter\Adapter;
