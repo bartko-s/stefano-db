@@ -1,7 +1,7 @@
 <?php
-namespace StefanoDb;
+namespace StefanoDb\Transaction;
 
-use StefanoDb\Transaction;
+use StefanoDb\Transaction\Transaction as Transaction;
 use Zend\Db\Adapter\Adapter;
 
 class TransactionManager
@@ -13,7 +13,7 @@ class TransactionManager
      * otherwise return existent object
      * 
      * @param \Zend\Db\Adapter\Adapter $dbAdapter
-     * @return \StefanoDb\Transaction
+     * @return \StefanoDb\Transaction\Transaction
      */
     static function getTransaction(Adapter $dbAdapter) {
         $dbAdapterId = spl_object_hash($dbAdapter);

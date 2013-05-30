@@ -1,7 +1,7 @@
 <?php
 namespace StefanoDbTest;
 
-use \StefanoDb\TransactionManager;
+use \StefanoDb\Transaction\TransactionManager;
 use \Zend\Db\Adapter\Adapter;
 
 class TransactionManagerTest
@@ -38,7 +38,7 @@ class TransactionManagerTest
     }
     
     public function testGetTransaction() {
-        $this->assertInstanceOf('\StefanoDb\Transaction',
+        $this->assertInstanceOf('\StefanoDb\Transaction\Transaction',
                 TransactionManager::getTransaction($this->dbAdapter));
         
         $transaction1 = TransactionManager::getTransaction($this->dbAdapter);

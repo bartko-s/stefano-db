@@ -1,7 +1,7 @@
 <?php
 namespace StefanoDbTest;
 
-use \StefanoDb\Transaction;
+use StefanoDb\Transaction\Transaction as Transaction;
 
 class TransactionTest
     extends \PHPUnit_Framework_TestCase
