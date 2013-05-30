@@ -60,7 +60,7 @@ class TransactionTest
         $transaction = new Transaction($dbAdapterMock);
         
         $transaction->begin()
-                    ->roolBack();        
+                    ->rollback();        
     }
     
     public function testCanBeginNestedTransaction() {
@@ -107,7 +107,7 @@ class TransactionTest
         
         $transaction->begin()
                     ->begin()
-                    ->roolBack();        
+                    ->rollback();        
     }    
     
     /**
