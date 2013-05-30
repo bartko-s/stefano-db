@@ -5,9 +5,9 @@ use Zend\Db\Adapter\Adapter;
 
 class Transaction
 {
-    protected $numberOfOpenedTransaction = 0;
+    private $numberOfOpenedTransaction = 0;
     
-    protected $dbAdapter;
+    private $dbAdapter;
     
     /**
      * @param \Zend\Db\Adapter\Adapter $dbAdapter
@@ -19,12 +19,13 @@ class Transaction
     /**
      * @return \Zend\Db\Adapter\Adapter
      */
-    protected function getDbAdapter() {
+    private function getDbAdapter() {
         return $this->dbAdapter;
     }
 
     /**
      * Begin transaction if it is not opened
+     * @return \StefanoDb\Transaction
      */
     public function begin() {
         if(0 == $this->getNumberOfOpenedTransaction()) {
@@ -34,10 +35,13 @@ class Transaction
                  ->beginTransaction();
         }
         $this->increaseNumberOfOpenedTransaction();
+        
+        return $this;
     }
     
     /**
      * Commit transaction if nested transaction is not opened
+     * @return \StefanoDb\Transaction
      */
     public function commit() {
         if(1 == $this->getNumberOfOpenedTransaction()) {
@@ -50,10 +54,13 @@ class Transaction
         if(0 < $this->getNumberOfOpenedTransaction()) {
             $this->decreaseNumberOfOpenedTransaction();
         }
+        
+        return $this;
     }
     
     /**
      * Roolback transaction
+     * @return \StefanoDb\Transaction
      */
     public function roolBack() {
         if(0 < $this->getNumberOfOpenedTransaction()) {
@@ -64,6 +71,8 @@ class Transaction
             
             $this->resetNumberOfOpenedTransaction();
         }
+        
+        return $this;
     }
     
     /**
@@ -82,19 +91,19 @@ class Transaction
      * Get number of opened transaction
      * @return int
      */
-    protected function getNumberOfOpenedTransaction() {
+    private function getNumberOfOpenedTransaction() {
         return $this->numberOfOpenedTransaction;
     }
     
-    protected function resetNumberOfOpenedTransaction() {
+    private function resetNumberOfOpenedTransaction() {
         $this->numberOfOpenedTransaction = 0;
     }
     
-    protected function increaseNumberOfOpenedTransaction() {
+    private function increaseNumberOfOpenedTransaction() {
         $this->numberOfOpenedTransaction++;
     }
     
-    protected function decreaseNumberOfOpenedTransaction() {
+    private function decreaseNumberOfOpenedTransaction() {
         $this->numberOfOpenedTransaction--;
     }
 }
