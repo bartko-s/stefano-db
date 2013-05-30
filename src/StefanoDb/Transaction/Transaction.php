@@ -52,7 +52,7 @@ class Transaction
         return $this;
     }
     
-    public function roolBack() {
+    public function rollback() {
         if(0 < $this->getNumberOfOpenedTransaction()) {
             $this->getDbAdapter()
                  ->getDriver()

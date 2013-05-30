@@ -19,7 +19,7 @@ interface TransactionInterface
      * Roolback transaction
      * @return self
      */
-    public function roolBack();
+    public function rollback();
     
     /**
      * Return true if transaction is opened
