@@ -1,7 +1,7 @@
 <?php
 namespace StefanoDb;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\AdapterInterface;
 
 class Transaction
 {
@@ -10,14 +10,14 @@ class Transaction
     private $dbAdapter;
     
     /**
-     * @param \Zend\Db\Adapter\Adapter $dbAdapter
+     * @param \Zend\Db\Adapter\AdapterInterface $dbAdapter
      */
-    public function __construct(Adapter $dbAdapter) {
+    public function __construct(AdapterInterface $dbAdapter) {
         $this->dbAdapter = $dbAdapter;
     }
     
     /**
-     * @return \Zend\Db\Adapter\Adapter
+     * @return \Zend\Db\Adapter\AdapterInterface
      */
     private function getDbAdapter() {
         return $this->dbAdapter;
