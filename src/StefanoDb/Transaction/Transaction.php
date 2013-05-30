@@ -2,8 +2,10 @@
 namespace StefanoDb\Transaction;
 
 use Zend\Db\Adapter\AdapterInterface;
+use StefanoDb\Transaction\TransactionInterface;
 
 class Transaction
+    implements TransactionInterface
 {
     private $numberOfOpenedTransaction = 0;
     
@@ -23,10 +25,6 @@ class Transaction
         return $this->dbAdapter;
     }
 
-    /**
-     * Begin transaction if it is not opened
-     * @return \StefanoDb\Transaction\Transaction
-     */
     public function begin() {
         if(0 == $this->getNumberOfOpenedTransaction()) {
             $this->getDbAdapter()
@@ -39,10 +37,6 @@ class Transaction
         return $this;
     }
     
-    /**
-     * Commit transaction if nested transaction is not opened
-     * @return \StefanoDb\Transaction\Transaction
-     */
     public function commit() {
         if(1 == $this->getNumberOfOpenedTransaction()) {
             $this->getDbAdapter()
@@ -58,10 +52,6 @@ class Transaction
         return $this;
     }
     
-    /**
-     * Roolback transaction
-     * @return \StefanoDb\Transaction\Transaction
-     */
     public function roolBack() {
         if(0 < $this->getNumberOfOpenedTransaction()) {
             $this->getDbAdapter()
@@ -75,10 +65,6 @@ class Transaction
         return $this;
     }
     
-    /**
-     * Retrun true if transaction is opened
-     * @return boolean
-     */
     public function isInTransaction() {
         if(0 < $this->getNumberOfOpenedTransaction()) {
             return true;
