@@ -5,13 +5,18 @@ use \StefanoDb\Transaction;
 
 class TransactionTest
     extends \PHPUnit_Framework_TestCase
-{    
+{   
+    /**
+     * 
+     * @param \Zend\Db\Adapter\Driver\ConnectionInterface $connectionMock
+     * @return \Zend\Db\Adapter\AdapterInterface
+     */
     private function getDbAdapterMock(\Zend\Db\Adapter\Driver\ConnectionInterface $connectionMock = null) {
         $driverMock = \Mockery::mock('\Zend\Db\Adapter\Driver\DriverInterface');
         $driverMock->shouldReceive('getConnection')
                    ->andReturn($connectionMock);
         
-        $dbAdapterMock = \Mockery::mock('\Zend\Db\Adapter\Adapter');
+        $dbAdapterMock = \Mockery::mock('\Zend\Db\Adapter\AdapterInterface');
         $dbAdapterMock->shouldReceive('getDriver')
                       ->andReturn($driverMock);
         
