@@ -1,94 +1,130 @@
 <?php
 namespace StefanoDbTest;
 
-use \Zend\Db\Adapter\Adapter as DbAdapter;
 use \StefanoDb\Transaction;
 
 class TransactionTest
     extends \PHPUnit_Framework_TestCase
-{
-    protected $dbAdapter;
-    
-    protected function setUp() {        
-        $dbAdapter = new DbAdapter(array(
-            'driver' => 'Pdo_' . ucfirst(TEST_STEFANO_DB_ADAPTER),
-            'hostname' => TEST_STEFANO_DB_HOSTNAME,
-            'database' => TEST_STEFANO_DB_DB_NAME,
-            'username' => TEST_STEFANO_DB_USER,
-            'password' => TEST_STEFANO_DB_PASSWORD
-        ));
-        $this->dbAdapter = $dbAdapter;
-    }
-    
-    protected function tearDown() {
-        $this->dbAdapter = null;        
-    }
-    
-    public function testBegin() {
-        $transaction = new Transaction($this->dbAdapter);
+{    
+    private function getDbAdapterMock(\Zend\Db\Adapter\Driver\ConnectionInterface $connectionMock = null) {
+        $driverMock = \Mockery::mock('\Zend\Db\Adapter\Driver\DriverInterface');
+        $driverMock->shouldReceive('getConnection')
+                   ->andReturn($connectionMock);
         
-        $this->assertFalse($transaction->isInTransaction());
-        $transaction->begin();
-        $this->assertTrue($transaction->isInTransaction());
+        $dbAdapterMock = \Mockery::mock('\Zend\Db\Adapter\Adapter');
+        $dbAdapterMock->shouldReceive('getDriver')
+                      ->andReturn($driverMock);
+        
+        return $dbAdapterMock;
+    }
+    
+    public function testCanBeginTransaction() {
+        $connectionMock = \Mockery::mock('\Zend\Db\Adapter\Driver\ConnectionInterface');
+        $connectionMock->shouldReceive('beginTransaction')
+                       ->once();
+        
+        $dbAdapterMock = $this->getDbAdapterMock($connectionMock);
+        
+        $transaction = new Transaction($dbAdapterMock);
+        
+        $transaction->begin();        
+    }    
+    
+    public function testCanCommitTransaction() {
+        $connectionMock = \Mockery::mock('\Zend\Db\Adapter\Driver\ConnectionInterface');
+        $connectionMock->shouldReceive('beginTransaction');
+        $connectionMock->shouldReceive('commit')
+                       ->once();
+        
+        $dbAdapterMock = $this->getDbAdapterMock($connectionMock);
+                
+        $transaction = new Transaction($dbAdapterMock);
+        
+        $transaction->begin()
+                    ->commit();        
+    }
+    
+    public function testCanRoolBackTransaction() {
+        $connectionMock = \Mockery::mock('\Zend\Db\Adapter\Driver\ConnectionInterface');
+        $connectionMock->shouldReceive('beginTransaction');
+        $connectionMock->shouldReceive('rollback')
+                       ->once();
+        
+        $dbAdapterMock = $this->getDbAdapterMock($connectionMock);
+        
+        $transaction = new Transaction($dbAdapterMock);
+        
+        $transaction->begin()
+                    ->roolBack();        
+    }
+    
+    public function testCanBeginNestedTransaction() {
+        $connectionMock = \Mockery::mock('\Zend\Db\Adapter\Driver\ConnectionInterface');
+        $connectionMock->shouldReceive('beginTransaction')
+                       ->once();
+        
+        $dbAdapterMock = $this->getDbAdapterMock($connectionMock);
+        
+        $transaction = new Transaction($dbAdapterMock);
+        
+        $transaction->begin()
+                    ->begin()
+                    ->begin();
+    }
+    
+    public function testCanCommitNestedTransaction() {
+        $connectionMock = \Mockery::mock('\Zend\Db\Adapter\Driver\ConnectionInterface');
+        $connectionMock->shouldReceive('beginTransaction');
+        $connectionMock->shouldReceive('commit')
+                       ->once();
+        
+        $dbAdapterMock = $this->getDbAdapterMock($connectionMock);
+        
+        $transaction = new Transaction($dbAdapterMock);
+        
+        $transaction->begin()
+                    ->begin()
+                    ->commit()
+                    ->begin()
+                    ->commit()
+                    ->commit();
+    }
+    
+    public function testCanRollbackNestedTransaction() {
+        $connectionMock = \Mockery::mock('\Zend\Db\Adapter\Driver\ConnectionInterface');
+        $connectionMock->shouldReceive('beginTransaction');
+        $connectionMock->shouldReceive('rollback')
+                       ->once();
+        
+        $dbAdapterMock = $this->getDbAdapterMock($connectionMock);
+        
+        $transaction = new Transaction($dbAdapterMock);
+        
+        $transaction->begin()
+                    ->begin()
+                    ->roolBack();        
     }    
     
     /**
-     * @depends testBegin
+     * @depends testCanCommitNestedTransaction
+     * @depends testCanBeginNestedTransaction
      */
-    public function testCommit() {
-        $transaction = new Transaction($this->dbAdapter);
+    public function testIsInTransaction() {
+        $connectionStub = \Mockery::mock('\Zend\Db\Adapter\Driver\ConnectionInterface');
+        $connectionStub->shouldReceive('beginTransaction');
+        $connectionStub->shouldReceive('commit');
         
-        $transaction->begin();
+        $dbAdapterMock = $this->getDbAdapterMock($connectionStub);
+        
+        $transaction = new Transaction($dbAdapterMock);
+        
+        $this->assertFalse($transaction->isInTransaction());
+        $transaction->begin()
+                    ->begin();
         $this->assertTrue($transaction->isInTransaction());
         $transaction->commit();
-        $this->assertFalse($transaction->isInTransaction());        
-    }
-    
-    /**
-     * @depends testBegin
-     */
-    public function testRoolBack() {
-        $transaction = new Transaction($this->dbAdapter);
-        
-        $transaction->begin();
         $this->assertTrue($transaction->isInTransaction());
-        $transaction->roolBack();
-        $this->assertFalse($transaction->isInTransaction());        
-    }
-    
-    /**
-     * @depends testBegin
-     * @depends testCommit
-     */
-    public function testBeginNestedTransaction() {
-        $transaction = new Transaction($this->dbAdapter);
-        
-        $this->assertFalse($transaction->isInTransaction());
-        $transaction->begin();
-        $this->assertTrue($transaction->isInTransaction());
-        $transaction->begin();
-        $this->assertTrue($transaction->isInTransaction()); 
         $transaction->commit();
-        $this->assertTrue($transaction->isInTransaction()); 
-        $transaction->commit();
-        $this->assertFalse($transaction->isInTransaction()); 
+        $this->assertFalse($transaction->isInTransaction());
     }
-    
-    /**
-     * @depends testBegin
-     * @depends testRoolBack
-     */
-    public function testRoolbalckNestedTransaction() {
-        $transaction = new Transaction($this->dbAdapter);
-        
-        $this->assertFalse($transaction->isInTransaction());
-        $transaction->begin();
-        $this->assertTrue($transaction->isInTransaction());
-        $transaction->begin();
-        $this->assertTrue($transaction->isInTransaction()); 
-        $transaction->roolBack();
-        $this->assertFalse($transaction->isInTransaction());
-        $transaction->roolBack();
-        $this->assertFalse($transaction->isInTransaction());
-    }    
 }
