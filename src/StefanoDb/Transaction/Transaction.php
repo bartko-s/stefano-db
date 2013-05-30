@@ -1,5 +1,5 @@
 <?php
-namespace StefanoDb;
+namespace StefanoDb\Transaction;
 
 use Zend\Db\Adapter\AdapterInterface;
 
@@ -25,7 +25,7 @@ class Transaction
 
     /**
      * Begin transaction if it is not opened
-     * @return \StefanoDb\Transaction
+     * @return \StefanoDb\Transaction\Transaction
      */
     public function begin() {
         if(0 == $this->getNumberOfOpenedTransaction()) {
@@ -41,7 +41,7 @@ class Transaction
     
     /**
      * Commit transaction if nested transaction is not opened
-     * @return \StefanoDb\Transaction
+     * @return \StefanoDb\Transaction\Transaction
      */
     public function commit() {
         if(1 == $this->getNumberOfOpenedTransaction()) {
@@ -60,7 +60,7 @@ class Transaction
     
     /**
      * Roolback transaction
-     * @return \StefanoDb\Transaction
+     * @return \StefanoDb\Transaction\Transaction
      */
     public function roolBack() {
         if(0 < $this->getNumberOfOpenedTransaction()) {
