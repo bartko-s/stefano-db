@@ -1,5 +1,5 @@
 <?php
-namespace StefanoDbTest;
+namespace StefanoDbTest\Transaction;
 
 use StefanoDb\Transaction\Transaction as Transaction;
 
