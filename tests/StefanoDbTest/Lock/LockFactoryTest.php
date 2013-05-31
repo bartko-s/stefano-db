@@ -28,11 +28,11 @@ class LockFactoryTest
         $lockFactory = new LockFactory();
         
         $this->assertInstanceOf('\StefanoDb\Lock\Adapter\Postgresql',
-                $lockFactory->getLockLockAdapter($dbAdapterStub),
+                $lockFactory->getLockAdapter($dbAdapterStub),
                 'Given adapter must be \StefanoDb\Lock\Adapter\Postresql instance');
         
         $this->assertInstanceOf('\StefanoDb\Lock\LockInterface',
-                $lockFactory->getLockLockAdapter($dbAdapterStub),
+                $lockFactory->getLockAdapter($dbAdapterStub),
                 'Given adapter must implements \StefanoDb\Lock\LockInterface');
     }
     
@@ -47,6 +47,6 @@ class LockFactoryTest
         $dbAdapterStub = $this->getDbAdapterStub($driverStub);
         
         $lockFactory = new LockFactory();        
-        $lockFactory->getLockLockAdapter($dbAdapterStub);
+        $lockFactory->getLockAdapter($dbAdapterStub);
     }
 }
