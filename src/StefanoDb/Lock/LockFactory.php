@@ -11,7 +11,7 @@ class LockFactory
      * @return \StefanoDb\Lock\LockInterface
      * @throws InvalidArgumentException
      */
-    public function getLockLockAdapter(DbAdapter $dbAdapter) {
+    public function getLockAdapter(DbAdapter $dbAdapter) {
         $platformName = $dbAdapter->getDriver()
                                   ->getDatabasePlatformName();
         
