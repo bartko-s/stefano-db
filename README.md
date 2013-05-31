@@ -11,4 +11,3 @@ Features
 
 ToDo
 -------
-- testy \StefanoDb\Lock class
