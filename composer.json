@@ -2,8 +2,7 @@
     "name": "stefano/stefano-db",
     "description": "Modul for Zend Framework 2",
     "version": "1.0.1",
-    "license": "BSD-3-Clause",
-    "type": "zf-module",
+    "license": "BSD-3-Clause",    
     "keywords": [
         "zf-module",
         "Db Transaction",
@@ -21,7 +20,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "zendframework/zendframework": ">=2.0.0"
+        "zendframework/zend-db": "2.2.*"
     },
     "require-dev": {
         "phpunit/PHPUnit": ">=3.7.0",
@@ -35,5 +34,11 @@
         "classmap": [
             "./src/"
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.zendframework.com/"
+        }
+    ]
 }

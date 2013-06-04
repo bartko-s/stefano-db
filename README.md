@@ -1,4 +1,4 @@
-ZF2 Stefano Db
+Stefano Db
 ===================
 
 Master: <a href="https://travis-ci.org/bartko-s/stefano-db"><img src="https://secure.travis-ci.org/bartko-s/stefano-db.png?branch=master" /></a>
