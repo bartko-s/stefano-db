@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <phpunit bootstrap="./bootstrap.php" colors="true">
     <testsuites>
-        <testsuite name="Stefano Db Tests">
-            <directory>./StefanoDbTest</directory>
+        <testsuite name="Stefano Db Unit Tests">
+            <directory>./StefanoDbTest/Unit</directory>
         </testsuite>
     </testsuites>
     <filter>

@@ -1,5 +1,5 @@
 <?php
-namespace StefanoDbTest\Lock;
+namespace StefanoDbTest\Unit\Lock;
 
 use StefanoDb\Lock\LockFactory;
 

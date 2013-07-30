@@ -1,5 +1,5 @@
 <?php
-namespace StefanoDbTest;
+namespace StefanoDbTest\Unit;
 
 use StefanoDb\Module;
 

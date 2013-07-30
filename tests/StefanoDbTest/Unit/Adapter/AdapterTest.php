@@ -1,5 +1,5 @@
 <?php
-namespace StefanoDbTest\Adapter;
+namespace StefanoDbTest\Unit\Adapter;
 
 use StefanoDb\Adapter\Adapter;
 
