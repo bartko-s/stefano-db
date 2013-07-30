@@ -10,12 +10,14 @@ Features
 - transaction manager
 - lock table
 - extended db adapter
+- db adapter service manager initializer
 
 Service keys
---------
+------------
 - StefanoDb\Adapter\Adapter or Zend\Db\Adapter\Adapter or DbAdapter return \StefanoDb\Adapter\Adapter instance
 
 Service Initializers
+--------------------
 - inject \StefanoDb\Adapter\Adapter instance into all service which implements \StefanoDb\Adapter\AdapterAwareInterface or \Zend\Db\Adapter\AdapterAwareInterface
 
 ToDo
