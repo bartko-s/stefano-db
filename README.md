@@ -1,8 +1,9 @@
 Stefano Db
 ===================
 
-Master: <a href="https://travis-ci.org/bartko-s/stefano-db"><img src="https://secure.travis-ci.org/bartko-s/stefano-db.png?branch=master" /></a>
-Develop: <a href="https://travis-ci.org/bartko-s/stefano-db"><img src="https://secure.travis-ci.org/bartko-s/stefano-db.png?branch=develop" /></a>
+| Master Build | Develop Build |
+| :---: | :---: |
+| <a href="https://travis-ci.org/bartko-s/stefano-db"><img src="https://secure.travis-ci.org/bartko-s/stefano-db.png?branch=master" /></a> | <a href="https://travis-ci.org/bartko-s/stefano-db"><img src="https://secure.travis-ci.org/bartko-s/stefano-db.png?branch=develop" /></a> |
 
 Features
 ------------
