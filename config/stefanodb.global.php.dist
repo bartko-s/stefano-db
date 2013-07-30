@@ -1,0 +1,11 @@
+<?php
+return array(    
+    'db' => array(
+        /* for more config option see zend\db documentation
+        'driver' => '',
+        'database' => '',
+        'username' => '',
+        'password' => '',         
+         */
+    ),    
+);

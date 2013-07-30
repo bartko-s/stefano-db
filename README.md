@@ -9,6 +9,12 @@ Features
 ------------
 - transaction manager
 - lock table
+- extended db adapter
+
+Services keys
+--------
+- StefanoDb\Adapter\Adapter or Zend\Db\Adapter\Adapter or DbAdapter return \StefanoDb\Adapter\Adapter instance
 
 ToDo
 -------
+- unit tests
