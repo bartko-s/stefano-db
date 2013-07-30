@@ -1,5 +1,5 @@
 <?php
-namespace StefanoDb\Lock\Exception;
+namespace StefanoDb\Exception;
 
 class InvalidArgumentException
     extends \InvalidArgumentException

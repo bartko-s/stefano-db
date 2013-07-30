@@ -2,7 +2,7 @@
 namespace StefanoDb\Lock;
 
 use Zend\Db\Adapter\Adapter as DbAdapter;
-use StefanoDb\Lock\Exception\InvalidArgumentException;
+use StefanoDb\Exception\InvalidArgumentException;
 
 class LockFactory
 {    

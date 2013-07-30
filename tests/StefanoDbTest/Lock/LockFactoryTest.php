@@ -37,7 +37,7 @@ class LockFactoryTest
     }
     
     public function testThrowAnExceptionIfLockAdapterForGivenDbPlatformIsNotSupported() {
-        $this->setExpectedException('\StefanoDb\Lock\Exception\InvalidArgumentException',
+        $this->setExpectedException('\StefanoDb\Exception\InvalidArgumentException',
                 'Lock Adapter for "Dont-exist" does not exist');
         
         $driverStub = \Mockery::mock('\Zend\Db\Adapter\Driver\DriverInterface');
