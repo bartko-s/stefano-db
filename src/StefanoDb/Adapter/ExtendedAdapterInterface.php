@@ -1,7 +1,10 @@
 <?php
 namespace StefanoDb\Adapter;
 
-interface ExtendedAdapterInterface    
+use Zend\Db\Adapter\AdapterInterface;
+
+interface ExtendedAdapterInterface
+    extends AdapterInterface
 {
     /**
      * @return \StefanoDb\Lock\LockInterface
