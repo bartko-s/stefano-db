@@ -1,9 +1,13 @@
 Stefano Db
 ===================
 
-| Master Build | Develop Build |
+| Test Status | Dependencies |
 | :---: | :---: |
-| <a href="https://travis-ci.org/bartko-s/stefano-db"><img src="https://secure.travis-ci.org/bartko-s/stefano-db.png?branch=master" /></a> | <a href="https://travis-ci.org/bartko-s/stefano-db"><img src="https://secure.travis-ci.org/bartko-s/stefano-db.png?branch=develop" /></a> |
+| <a href="https://travis-ci.org/bartko-s/stefano-db"><img src="https://secure.travis-ci.org/bartko-s/stefano-db.png?branch=master" /></a> | <a href='https://www.versioneye.com/user/projects/51bc294809732f0002004f51'><img src='https://www.versioneye.com/user/projects/51bc294809732f0002004f51/badge.png' alt="Dependency Status" /></a> |
+
+Instalation using Composer
+--------------------------
+1. Add following line to composer.json  ``` "stefano/stefano-db": "*" ```
 
 Features
 ------------
