@@ -7,5 +7,14 @@ return array(
         'username' => '',
         'password' => '',         
          */
-    ),    
+    ),   
+    'stefano_db' => array(
+        /*
+         * //This is executed once after db adapter object is created
+        'sqls' => array(
+            "SET time_zone='+0:00'",
+            "....." 
+        )
+         */
+    ),
 );

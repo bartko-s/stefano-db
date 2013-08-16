@@ -17,4 +17,7 @@ return array(
     'db' => array(
         
     ),
+    'stefano_db' => array(
+        
+    ),
 );

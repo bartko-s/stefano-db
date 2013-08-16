@@ -10,6 +10,14 @@ class AdapterFactory
     public function createService(\Zend\ServiceManager\ServiceLocatorInterface $serviceLocator) {
         $config = $serviceLocator->get('Configuration');
         
-        return new Adapter($config['db']);
+        $dbAdapter = new Adapter($config['db']);
+        
+        if(array_key_exists('sqls', $config['stefano_db'])) {
+            foreach($config['stefano_db']['sqls'] as $sql) {
+                $dbAdapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
+            }
+        }
+        
+        return $dbAdapter;
     }    
 }
