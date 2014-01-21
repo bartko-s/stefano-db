@@ -11,7 +11,7 @@ Instalation using Composer
 
 Features
 ------------
-- transaction manager
+- nested transaction
 - lock table
 - extended db adapter
 - db adapter service manager initializer
