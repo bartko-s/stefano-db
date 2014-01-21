@@ -2,6 +2,7 @@
 namespace StefanoDb\Adapter;
 
 use Zend\Db\Adapter\AdapterInterface;
+use StefanoNestedTransaction\TransactionManagerInterface;
 
 interface ExtendedAdapterInterface
     extends AdapterInterface
@@ -12,7 +13,7 @@ interface ExtendedAdapterInterface
     public function getLockAdapter();
     
     /**
-     * @return \StefanoDb\Transaction\TransactionInterface
+     * @return TransactionManagerInterface
      */
     public function getTransaction();
 }

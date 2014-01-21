@@ -2,6 +2,7 @@
 namespace StefanoDbTest\Unit\Adapter;
 
 use StefanoDb\Adapter\Adapter;
+use StefanoNestedTransaction\TransactionManager;
 
 class AdapterTest
     extends \PHPUnit_Framework_TestCase
@@ -44,16 +45,18 @@ class AdapterTest
     }
     
     public function testSetGetTransaction() {
-        $transactionStub = \Mockery::mock('\StefanoDb\Transaction\TransactionInterface');
+        $transactionStub = \Mockery::mock('\StefanoDb\Transaction\Adapter');
+
+        $transaction = new TransactionManager($transactionStub);
         
         $dbAdapter = $this->adapter;
-        $dbAdapter->setTransaction($transactionStub);
-        $this->assertSame($transactionStub, $dbAdapter->getTransaction());
+        $dbAdapter->setTransaction($transaction);
+        $this->assertSame($transaction, $dbAdapter->getTransaction());
     }
     
     public function testLazyLoadedTransaction() {
         $dbAdapter = $this->adapter;
-        $this->assertInstanceOf('\StefanoDb\Transaction\TransactionInterface',
+        $this->assertInstanceOf('\StefanoNestedTransaction\TransactionManagerInterface',
                 $dbAdapter->getTransaction());
         $this->assertSame($dbAdapter->getTransaction(), $dbAdapter->getTransaction()); //return same object
     }

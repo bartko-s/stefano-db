@@ -3,10 +3,11 @@ namespace StefanoDb\Adapter;
 
 use StefanoDb\Adapter\ExtendedAdapterInterface;
 use Zend\Db\Adapter\Adapter as DbAdapter;
-use StefanoDb\Transaction\TransactionInterface;
-use StefanoDb\Transaction\Transaction;
 use StefanoDb\Lock\LockFactory;
 use StefanoDb\Lock\LockInterface;
+use StefanoNestedTransaction\TransactionManager;
+use StefanoNestedTransaction\TransactionManagerInterface;
+use StefanoDb\Transaction\Adapter as TransactionAdapter;
 
 class Adapter
     extends DbAdapter
@@ -34,17 +35,18 @@ class Adapter
     }
     
     /**
-     * @param \StefanoDb\Transaction\TransactionInterface $transaction
+     * @param TransactionManagerInterface $transactionManager
      * @return this
      */
-    public function setTransaction(TransactionInterface $transaction) {
-        $this->transaction = $transaction;
+    public function setTransaction(TransactionManagerInterface $transactionManager) {
+        $this->transaction = $transactionManager;
         return $this;
     }
     
     public function getTransaction() {
         if(null == $this->transaction) {
-            $this->transaction = new Transaction($this);
+            $transactionAdapter = new TransactionAdapter($this);
+            $this->transaction = new TransactionManager($transactionAdapter);
         }
         
         return $this->transaction;
