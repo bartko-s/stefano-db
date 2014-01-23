@@ -11,9 +11,9 @@ Instalation using Composer
 
 Features
 ------------
-- nested transaction
-- lock table
-- extended db adapter
+- extend Zend Framework 2 Database adapter. For more info see [Zend Db](http://framework.zend.com/manual/2.2/en/index.html#zend-db)
+- nested transaction. For more info see [Stefano nested transaction](https://github.com/bartko-s/stefano-nested-transaction/)
+- lock table. Supported vendors see [Stefano lock table](https://github.com/bartko-s/stefano-lock-table)
 - db adapter service manager initializer
 
 Service keys
@@ -24,6 +24,35 @@ Service Initializers
 --------------------
 - inject \StefanoDb\Adapter\Adapter instance into all service which implements \StefanoDb\Adapter\AdapterAwareInterface or \Zend\Db\Adapter\AdapterAwareInterface
 
-ToDo
+Usage
 -------
-- unit tests
+
+- adapter configuration
+
+```
+//$option for more info see Zend Framework 2 Db documentation
+$adapter = new \StefanoDb\Adapter\Adapter($options);
+```
+
+- nested transaction api
+
+```
+$transaction = $adapter->getTransaction();
+
+$transaction->begin();
+$transaction->commit();
+$transaction->rollback();
+```
+
+- lock table api
+
+```
+$lock = $adapter->getLockAdapter();
+
+//exclusive lock
+$lock->lockTables('someTableName');
+$lock->lockTables(array('someTableName', 'anotherTable'));
+
+//unlock tables
+$lock->unlockTables();
+```
