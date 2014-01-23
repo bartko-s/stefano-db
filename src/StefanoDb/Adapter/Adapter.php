@@ -3,8 +3,8 @@ namespace StefanoDb\Adapter;
 
 use StefanoDb\Adapter\ExtendedAdapterInterface;
 use Zend\Db\Adapter\Adapter as DbAdapter;
-use StefanoDb\Lock\LockFactory;
 use StefanoDb\Lock\LockInterface;
+use StefanoDb\Lock\Lock;
 use StefanoNestedTransaction\TransactionManager;
 use StefanoNestedTransaction\TransactionManagerInterface;
 use StefanoDb\Transaction\Adapter as TransactionAdapter;
@@ -17,7 +17,7 @@ class Adapter
     private $transaction;
     
     /**
-     * @param \StefanoDb\Lock\LockInterface $lockAdapter
+     * @param LockInterface $lockAdapter
      * @return this
      */
     public function setLockAdapter(LockInterface $lockAdapter) {
@@ -27,8 +27,7 @@ class Adapter
     
     public function getLockAdapter() {
         if(null === $this->lockAdapter) {
-            $lockFactory = new LockFactory();
-            $this->lockAdapter = $lockFactory->getLockAdapter($this);
+            $this->lockAdapter = Lock::factory($this);
         }
         
         return $this->lockAdapter;

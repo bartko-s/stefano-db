@@ -40,7 +40,8 @@ class AdapterTest
     
     public function testLazyLoadedLockAdapter() {
         $dbAdapter = $this->adapter;
-        $this->assertInstanceOf('\StefanoDb\Lock\Adapter\Mysql', $dbAdapter->getLockAdapter());
+        $this->assertInstanceOf('\StefanoDb\Lock\Lock',
+            $dbAdapter->getLockAdapter());
         $this->assertSame($dbAdapter->getLockAdapter(), $dbAdapter->getLockAdapter()); //return same object
     }
     

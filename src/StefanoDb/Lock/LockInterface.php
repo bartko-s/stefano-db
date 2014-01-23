@@ -4,7 +4,7 @@ namespace StefanoDb\Lock;
 interface LockInterface
 {
     /**
-     * Lock table or tables
+     * Exclusive Lock table or tables
      * @param string|array $tables table name or array of tables
      * @return self
      */
