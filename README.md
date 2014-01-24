@@ -13,7 +13,6 @@ Features
 ------------
 - extend Zend Framework 2 Database adapter. For more info see [Zend Db](http://framework.zend.com/manual/2.2/en/index.html#zend-db)
 - nested transaction. For more info see [Stefano nested transaction](https://github.com/bartko-s/stefano-nested-transaction/)
-- lock table. Supported vendors see [Stefano lock table](https://github.com/bartko-s/stefano-lock-table)
 - db adapter service manager initializer
 
 Service keys
@@ -42,17 +41,4 @@ $transaction = $adapter->getTransaction();
 $transaction->begin();
 $transaction->commit();
 $transaction->rollback();
-```
-
-- lock table api
-
-```
-$lock = $adapter->getLockAdapter();
-
-//exclusive lock
-$lock->lockTables('someTableName');
-$lock->lockTables(array('someTableName', 'anotherTable'));
-
-//unlock tables
-$lock->unlockTables();
 ```

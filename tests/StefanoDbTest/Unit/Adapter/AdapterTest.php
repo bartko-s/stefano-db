@@ -30,21 +30,6 @@ class AdapterTest
         $this->assertInstanceOf('\StefanoDb\Adapter\ExtendedAdapterInterface', $this->adapter);
     }
     
-    public function testSetGetLockAdapter() {
-        $lockAdapterStub = \Mockery::mock('\StefanoDb\Lock\LockInterface');
-        
-        $dbAdapter = $this->adapter;
-        $dbAdapter->setLockAdapter($lockAdapterStub);
-        $this->assertSame($lockAdapterStub, $dbAdapter->getLockAdapter());
-    }
-    
-    public function testLazyLoadedLockAdapter() {
-        $dbAdapter = $this->adapter;
-        $this->assertInstanceOf('\StefanoDb\Lock\Lock',
-            $dbAdapter->getLockAdapter());
-        $this->assertSame($dbAdapter->getLockAdapter(), $dbAdapter->getLockAdapter()); //return same object
-    }
-    
     public function testSetGetTransaction() {
         $transactionStub = \Mockery::mock('\StefanoDb\Transaction\Adapter');
 

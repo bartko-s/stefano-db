@@ -6,12 +6,7 @@ use StefanoNestedTransaction\TransactionManagerInterface;
 
 interface ExtendedAdapterInterface
     extends AdapterInterface
-{
-    /**
-     * @return \StefanoDb\Lock\LockInterface
-     */
-    public function getLockAdapter();
-    
+{   
     /**
      * @return TransactionManagerInterface
      */
