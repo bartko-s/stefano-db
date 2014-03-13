@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "zendframework/zendframework": "2.2.*",
+        "zendframework/zendframework": "2.*",
         "stefano/stefano-nested-transaction": "0.0.*"
     },
     "require-dev": {
