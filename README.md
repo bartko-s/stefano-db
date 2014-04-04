@@ -3,7 +3,7 @@ Stefano Db
 
 | Test Status | Code Coverage | Dependencies |
 | :---: | :---: | :---: |
-| [![Test Status](https://secure.travis-ci.org/bartko-s/stefano-db.png?branch=master)](https://travis-ci.org/bartko-s/stefano-db") | [![Code Coverege](https://coveralls.io/repos/bartko-s/stefano-db/badge.png?branch=master)](https://coveralls.io/r/bartko-s/stefano-db?branch=master) | [![Dependencies](https://www.versioneye.com/user/projects/51bc294809732f0002004f51/badge.png)](https://www.versioneye.com/user/projects/51bc294809732f0002004f51) |
+| [![Test Status](https://secure.travis-ci.org/bartko-s/stefano-db.png?branch=master)](https://travis-ci.org/bartko-s/stefano-db) | [![Code Coverege](https://coveralls.io/repos/bartko-s/stefano-db/badge.png?branch=master)](https://coveralls.io/r/bartko-s/stefano-db?branch=master) | [![Dependencies](https://www.versioneye.com/user/projects/51bc294809732f0002004f51/badge.png)](https://www.versioneye.com/user/projects/51bc294809732f0002004f51) |
 
 Instalation using Composer
 --------------------------
