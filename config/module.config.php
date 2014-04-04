@@ -2,22 +2,22 @@
 return array(
     'service_manager' => array(
         'factories' => array(
-            'StefanoDb\Adapter\Adapter'
+            'Zend\Db\Adapter\Adapter'
                 => '\StefanoDb\Adapter\Service\AdapterFactory',
         ),
         'aliases' => array(
-            'Zend\Db\Adapter\Adapter' => 'StefanoDb\Adapter\Adapter',
-            'DbAdapter' => 'StefanoDb\Adapter\Adapter',
+            'StefanoDb\Adapter\Adapter' => 'Zend\Db\Adapter\Adapter',
+            'DbAdapter' => 'Zend\Db\Adapter\Adapter',
         ),
         'initializers' => array(
             'StefanoDbAdapterInitializer'
                 => '\StefanoDb\Initializer\DbInitializer'
         ),
-    ),    
+    ),
     'db' => array(
-        
+
     ),
     'stefano_db' => array(
-        
+
     ),
 );
