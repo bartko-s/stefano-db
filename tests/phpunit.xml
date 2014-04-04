@@ -4,10 +4,13 @@
         <testsuite name="unit">
             <directory>./StefanoDbTest/Unit</directory>
         </testsuite>
+        <testsuite name="integration">
+            <directory>./StefanoDbTest/Integration</directory>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist>
-            <directory suffix=".php">../src/</directory>    
+            <directory suffix=".php">../src/</directory>
         </whitelist>
     </filter>
     <logging>
