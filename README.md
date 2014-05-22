@@ -11,29 +11,21 @@ Instalation using Composer
 
 Features
 ------------
-- extend Zend Framework 2 Database adapter. For more info see [Zend Db](http://framework.zend.com/manual/2.2/en/index.html#zend-db)
+- extend Zend Framework 2 Database adapter. For more info see [Zend Db](http://framework.zend.com/manual/2.3/en/index.html#zend-db)
 - nested transaction. For more info see [Stefano nested transaction](https://github.com/bartko-s/stefano-nested-transaction/)
-- db adapter service manager initializer
+- execute defined queries after db connection will be created
 
-Service keys
-------------
-- StefanoDb\Adapter\Adapter or Zend\Db\Adapter\Adapter or DbAdapter return \StefanoDb\Adapter\Adapter instance
 
-Service Initializers
---------------------
-- inject \StefanoDb\Adapter\Adapter instance into all service which implements \StefanoDb\Adapter\AdapterAwareInterface or \Zend\Db\Adapter\AdapterAwareInterface
-
-Usage
--------
-
-- adapter configuration
+Db Adapter Configuration
+------------------------
 
 ```
 //$option for more info see Zend Framework 2 Db documentation
 $adapter = new \StefanoDb\Adapter\Adapter($options);
 ```
 
-- nested transaction api
+Nested transaction API
+----------------------
 
 ```
 $transaction = $adapter->getTransaction();
@@ -41,4 +33,67 @@ $transaction = $adapter->getTransaction();
 $transaction->begin();
 $transaction->commit();
 $transaction->rollback();
+```
+
+Usage with Zend Framework 2 MVC
+-------------------------------
+
+- single DB connection configuration
+
+```
+return array(
+    //single DB connection
+    'db' => array(
+        'driver' => '',
+        'database' => '',
+        'username' => '',
+        'password' => '',
+        'sqls' => array(
+            "SET time_zone='+0:00'",
+            "....."
+        ),
+    ),
+    'service_manager' => array(
+        'factories' => array(
+            'Zend\Db\Adapter\Adapter'
+                => '\StefanoDb\Adapter\Service\AdapterServiceFactory',
+        ),
+    ),
+);
+```
+
+- multiple DB connection configuration
+
+```
+return array(
+    'db' => array(
+        'adapters' => array(
+            'Db/Write' => array(
+                'driver' => '',
+                'database' => '',
+                'username' => '',
+                'password' => '',
+                'sqls' => array(
+                    "SET time_zone='+0:00'",
+                    "....."
+                ),
+            ),
+            'Db/Read' => array(
+                'driver' => '',
+                'database' => '',
+                'username' => '',
+                'password' => '',
+                'sqls' => array(
+                    "SET time_zone='+0:00'",
+                    "....."
+                ),
+            ),
+        ),
+    ),
+    'service_manager' => array(
+        'abstract_factories' => array(
+            '\StefanoDb\Adapter\Service\AdapterAbstractServiceFactory',
+        ),
+    ),
+);
 ```

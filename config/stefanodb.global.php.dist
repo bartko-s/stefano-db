@@ -1,20 +1,51 @@
 <?php
-return array(    
+return array(
+    //single DB connection
     'db' => array(
-        /* for more config option see zend\db documentation
         'driver' => '',
         'database' => '',
         'username' => '',
-        'password' => '',         
-         */
-    ),   
-    'stefano_db' => array(
-        /*
-         * //This is executed once after db adapter object is created
+        'password' => '',
         'sqls' => array(
             "SET time_zone='+0:00'",
-            "....." 
-        )
-         */
+            "....."
+        ),
+    ),
+    'service_manager' => array(
+        'factories' => array(
+            'Zend\Db\Adapter\Adapter'
+                => '\StefanoDb\Adapter\Service\AdapterServiceFactory',
+        ),
+    ),
+
+    //multiple DB connections
+    'db' => array(
+        'adapters' => array(
+            'Db/Write' => array(
+                'driver' => '',
+                'database' => '',
+                'username' => '',
+                'password' => '',
+                'sqls' => array(
+                    "SET time_zone='+0:00'",
+                    "....."
+                ),
+            ),
+            'Db/Read' => array(
+                'driver' => '',
+                'database' => '',
+                'username' => '',
+                'password' => '',
+                'sqls' => array(
+                    "SET time_zone='+0:00'",
+                    "....."
+                ),
+            ),
+        ),
+    ),
+    'service_manager' => array(
+        'abstract_factories' => array(
+            '\StefanoDb\Adapter\Service\AdapterAbstractServiceFactory',
+        ),
     ),
 );
