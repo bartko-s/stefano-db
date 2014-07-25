@@ -21,13 +21,28 @@ class Adapter
         $this->transaction = $transactionManager;
         return $this;
     }
-    
+
     public function getTransaction() {
         if(null == $this->transaction) {
             $transactionAdapter = new TransactionAdapter($this);
             $this->transaction = new TransactionManager($transactionAdapter);
         }
-        
+
         return $this->transaction;
+    }
+
+    public function begin() {
+        $this->getTransaction()
+             ->begin();
+    }
+
+    public function commit() {
+        $this->getTransaction()
+             ->commit();
+    }
+
+    public function rollback() {
+        $this->getTransaction()
+             ->rollback();
     }
 }

@@ -28,11 +28,9 @@ Nested transaction API
 ----------------------
 
 ```
-$transaction = $adapter->getTransaction();
-
-$transaction->begin();
-$transaction->commit();
-$transaction->rollback();
+adapter->begin();
+$adapter->commit();
+$adapter->rollback();
 ```
 
 Usage with Zend Framework 2 MVC

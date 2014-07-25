@@ -2,13 +2,25 @@
 namespace StefanoDb\Adapter;
 
 use Zend\Db\Adapter\AdapterInterface;
-use StefanoNestedTransaction\TransactionManagerInterface;
 
 interface ExtendedAdapterInterface
     extends AdapterInterface
-{   
+{
     /**
-     * @return TransactionManagerInterface
+     * Begin nested transaction
+     * @return void
      */
-    public function getTransaction();
+    public function begin();
+
+    /**
+     * Commit nested transaction
+     * @return void
+     */
+    public function commit();
+
+    /**
+     * Roolback nested transaction
+     * @return void
+     */
+    public function rollback();
 }
