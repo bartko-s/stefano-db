@@ -28,7 +28,7 @@ Nested transaction API
 ----------------------
 
 ```
-adapter->begin();
+$adapter->begin();
 $adapter->commit();
 $adapter->rollback();
 ```
