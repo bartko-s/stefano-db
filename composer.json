@@ -1,7 +1,7 @@
 {
     "name": "stefano/stefano-db",
     "description": "Db Modul extend Zend Framework 2",
-    "version": "1.4.0",
+    "version": "1.4.1-dev",
     "license": "BSD-3-Clause",
     "keywords": [
         "Nested Db Transaction"
