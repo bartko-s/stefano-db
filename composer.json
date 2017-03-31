@@ -23,7 +23,7 @@
         "stefano/stefano-nested-transaction": "0.*"
     },
     "require-dev": {
-        "phpunit/PHPUnit": ">=3.7.0",
+        "phpunit/PHPUnit": "~5",
         "mockery/mockery": ">=0.0.7",
         "satooshi/php-coveralls": "dev-master"
     },
