@@ -23,18 +23,22 @@
         "stefano/stefano-nested-transaction": "0.*"
     },
     "require-dev": {
-        "phpunit/PHPUnit": ">=6.0.0",
-        "mockery/mockery": ">=0.9.0",
+        "phpunit/PHPUnit": "^6.0.0",
+        "mockery/mockery": "^0.9.0",
         "satooshi/php-coveralls": "dev-master"
     },
     "autoload": {
         "psr-0": {
-            "StefanoDb\\": "src/",
-            "StefanoDbTest\\": "tests/"
+            "StefanoDb\\": "src/"
         },
         "classmap": [
             "./src/"
         ]
+    },
+    "autoload-dev": {
+      "psr-0": {
+        "StefanoDbTest\\": "tests/"
+      }
     },
     "scripts": {
         "test": "vendor/bin/phpunit --configuration tests/phpunit.xml"
