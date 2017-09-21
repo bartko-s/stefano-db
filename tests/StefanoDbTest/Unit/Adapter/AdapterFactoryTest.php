@@ -4,9 +4,10 @@ namespace StefanoDbTest\Unit\Adapter;
 use StefanoDb\Adapter\AdapterFactory;
 use StefanoDb\Adapter\ExtendedAdapterInterface;
 use StefanoDb\MultiQuery;
+use StefanoDbTest\TestCase;
 
 class AdapterFactoryTest
-    extends \PHPUnit_Framework_TestCase
+    extends TestCase
 {
     public function testCreateDbAdapter() {
         $adapterConfig = array(

@@ -3,9 +3,10 @@ namespace StefanoDbTest\Unit;
 
 use StefanoDb\Adapter\Adapter as DbAdapter;
 use StefanoDb\MultiQuery;
+use StefanoDbTest\TestCase;
 
 class MultiQueryTest
-    extends \PHPUnit_Framework_TestCase
+    extends TestCase
 {
     public function testExecute() {
         $queries = array(

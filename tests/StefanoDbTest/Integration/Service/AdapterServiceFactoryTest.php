@@ -3,11 +3,12 @@ namespace StefanoDbTest\Integration\Service;
 
 use StefanoDb\Adapter\ExtendedAdapterInterface;
 use StefanoDb\Adapter\Service\AdapterServiceFactory;
+use StefanoDbTest\TestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 
 class AdapterServiceFactoryTest
-    extends \PHPUnit_Framework_TestCase
+    extends TestCase
 {
     /**
     * @var ServiceLocatorInterface

@@ -3,12 +3,13 @@ namespace StefanoDbTest\Integration\Service;
 
 use StefanoDb\Adapter\ExtendedAdapterInterface;
 use StefanoDb\Adapter\Service\AdapterAbstractServiceFactory;
+use StefanoDbTest\TestCase;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 
 class AdapterAbstractServiceFactoryTest
-    extends \PHPUnit_Framework_TestCase
+    extends TestCase
 {
     /**
     * @var ServiceLocatorInterface
@@ -55,7 +56,7 @@ class AdapterAbstractServiceFactoryTest
     }
 
     public function testInvalidService() {
-        $this->setExpectedException(ServiceNotFoundException::class);
+        $this->expectException(ServiceNotFoundException::class);
 
         $sm = $this->serviceManager;
 

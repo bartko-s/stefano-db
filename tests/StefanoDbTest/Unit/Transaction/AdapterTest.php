@@ -2,13 +2,14 @@
 namespace StefanoDbTest\Transaction;
 
 use StefanoDb\Transaction\Adapter;
+use StefanoDbTest\TestCase;
 use StefanoNestedTransaction\Adapter\TransactionInterface;
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\Adapter\Driver\ConnectionInterface;
 use Zend\Db\Adapter\Driver\DriverInterface;
 
 class AdapterTest
-    extends \PHPUnit_Framework_TestCase
+    extends TestCase
 {    
     /**
      * 

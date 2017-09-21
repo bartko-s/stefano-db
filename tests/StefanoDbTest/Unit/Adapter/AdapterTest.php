@@ -4,12 +4,13 @@ namespace StefanoDbTest\Unit\Adapter;
 use StefanoDb\Adapter\Adapter;
 use StefanoDb\Adapter\ExtendedAdapterInterface;
 use StefanoDb\Transaction\Adapter as TransactionAdapter;
+use StefanoDbTest\TestCase;
 use StefanoNestedTransaction\TransactionManager;
 use StefanoNestedTransaction\TransactionManagerInterface;
 use Zend\Db\Adapter\Driver\Pdo\Pdo;
 
 class AdapterTest
-    extends \PHPUnit_Framework_TestCase
+    extends TestCase
 {
     /**
      * @var Adapter
