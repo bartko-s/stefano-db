@@ -7,7 +7,7 @@ Stefano Db
 
 Instalation using Composer
 --------------------------
-1. Add following line to composer.json  ``` "stefano/stefano-db": "*" ```
+1. Run command  ``` composer require stefano/stefano-db ```
 
 Features
 ------------
