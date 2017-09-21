@@ -1,9 +1,9 @@
 <?php
 namespace StefanoDb\Adapter\Service;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Db\Adapter\AdapterServiceFactory as ZendAdapterServiceFactory;
+use Interop\Container\ContainerInterface;
 use StefanoDb\Adapter\AdapterFactory;
+use Zend\Db\Adapter\AdapterServiceFactory as ZendAdapterServiceFactory;
 
 class AdapterServiceFactory
     extends ZendAdapterServiceFactory
@@ -17,8 +17,8 @@ class AdapterServiceFactory
         $this->adapterFactory = $adapterFactory;
     }
 
-    public function createService(ServiceLocatorInterface $serviceLocator) {
-        $config = $serviceLocator->get('Config');
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null) {
+        $config = $container->get('Config');
 
         return $this->getAdapterFactory()
                     ->create($config['db']);

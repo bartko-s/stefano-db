@@ -2,7 +2,6 @@
 namespace StefanoDbTest\Integration\Service;
 
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\Config as ServiceManagerConfig;
 
 class AdapterAbstractServiceFactoryTest
     extends \PHPUnit_Framework_TestCase
@@ -13,11 +12,11 @@ class AdapterAbstractServiceFactoryTest
     private $serviceManager;
 
     protected function setUp() {
-        $this->serviceManager = new ServiceManager(new ServiceManagerConfig(array(
+        $this->serviceManager = new ServiceManager(array(
             'abstract_factories' => array('\StefanoDb\Adapter\Service\AdapterAbstractServiceFactory'),
-        )));
+        ));
 
-        $this->serviceManager->setService('Config', array(
+        $this->serviceManager->setService('config', array(
             'db' => array(
                 'adapters' => array(
                     'Db/Write' => array(
@@ -42,7 +41,7 @@ class AdapterAbstractServiceFactoryTest
 
     /**
      * @dataProvider validServices
-     * @param type $serviceName
+     * @param string $serviceName
      */
     public function testValidService($serviceName) {
         $sm = $this->serviceManager;
