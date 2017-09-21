@@ -1,19 +1,23 @@
 <?php
 namespace StefanoDbTest\Integration\Service;
 
+use StefanoDb\Adapter\ExtendedAdapterInterface;
+use StefanoDb\Adapter\Service\AdapterAbstractServiceFactory;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 
 class AdapterAbstractServiceFactoryTest
     extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @var \Zend\ServiceManager\ServiceLocatorInterface
+    * @var ServiceLocatorInterface
     */
     private $serviceManager;
 
     protected function setUp() {
         $this->serviceManager = new ServiceManager(array(
-            'abstract_factories' => array('\StefanoDb\Adapter\Service\AdapterAbstractServiceFactory'),
+            'abstract_factories' => array(AdapterAbstractServiceFactory::class),
         ));
 
         $this->serviceManager->setService('config', array(
@@ -46,16 +50,16 @@ class AdapterAbstractServiceFactoryTest
     public function testValidService($serviceName) {
         $sm = $this->serviceManager;
 
-        $this->assertInstanceOf('\StefanoDb\Adapter\ExtendedAdapterInterface',
+        $this->assertInstanceOf( ExtendedAdapterInterface::class,
             $sm->get($serviceName));
     }
 
     public function testInvalidService() {
-        $this->setExpectedException('\Zend\ServiceManager\Exception\ServiceNotFoundException');
+        $this->setExpectedException(ServiceNotFoundException::class);
 
         $sm = $this->serviceManager;
 
-        $this->assertInstanceOf('\StefanoDb\Adapter\ExtendedAdapterInterface',
+        $this->assertInstanceOf(ExtendedAdapterInterface::class,
             $sm->get('unknown'));
     }
 }

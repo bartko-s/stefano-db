@@ -2,17 +2,16 @@
 namespace StefanoDb\Adapter;
 
 use StefanoDb\MultiQuery;
-use StefanoDb\Adapter\Adapter;
 
 class AdapterFactory
 {
     private $multiQuery;
 
     /**
-     * @param MultiQuery|null $multyQuery
+     * @param MultiQuery|null $multiQuery
      */
-    public function __construct(MultiQuery $multyQuery = null) {
-        $this->multiQuery = $multyQuery;
+    public function __construct(MultiQuery $multiQuery = null) {
+        $this->multiQuery = $multiQuery;
     }
 
     /**

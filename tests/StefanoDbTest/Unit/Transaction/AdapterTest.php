@@ -2,21 +2,25 @@
 namespace StefanoDbTest\Transaction;
 
 use StefanoDb\Transaction\Adapter;
+use StefanoNestedTransaction\Adapter\TransactionInterface;
+use Zend\Db\Adapter\AdapterInterface;
+use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Driver\DriverInterface;
 
 class AdapterTest
     extends \PHPUnit_Framework_TestCase
 {    
     /**
      * 
-     * @param \Zend\Db\Adapter\Driver\ConnectionInterface $connectionMock
-     * @return \Zend\Db\Adapter\AdapterInterface
+     * @param ConnectionInterface $connectionMock
+     * @return AdapterInterface
      */
-    private function getDbAdapterMock(\Zend\Db\Adapter\Driver\ConnectionInterface $connectionMock = null) {
-        $driverMock = \Mockery::mock('\Zend\Db\Adapter\Driver\DriverInterface');
+    private function getDbAdapterMock(ConnectionInterface $connectionMock = null) {
+        $driverMock = \Mockery::mock(DriverInterface::class);
         $driverMock->shouldReceive('getConnection')
                    ->andReturn($connectionMock);
         
-        $dbAdapterMock = \Mockery::mock('\Zend\Db\Adapter\AdapterInterface');
+        $dbAdapterMock = \Mockery::mock(AdapterInterface::class);
         $dbAdapterMock->shouldReceive('getDriver')
                       ->andReturn($driverMock);
         
@@ -24,15 +28,15 @@ class AdapterTest
     }
 
     public function testImplementsRequiredInterface() {
-        $dbAdapterStub = \Mockery::mock('Zend\Db\Adapter\AdapterInterface');
+        $dbAdapterStub = \Mockery::mock(AdapterInterface::class);
         $adapter = new Adapter($dbAdapterStub);
 
-        $this->assertInstanceOf('StefanoNestedTransaction\Adapter\TransactionInterface',
+        $this->assertInstanceOf(TransactionInterface::class,
             $adapter);
     }
     
     public function testBeginTransaction() {
-        $connectionMock = \Mockery::mock('\Zend\Db\Adapter\Driver\ConnectionInterface');
+        $connectionMock = \Mockery::mock(ConnectionInterface::class);
         $connectionMock->shouldReceive('beginTransaction')
                        ->once();
         
@@ -43,7 +47,7 @@ class AdapterTest
     }    
     
     public function testCommitTransaction() {
-        $connectionMock = \Mockery::mock('\Zend\Db\Adapter\Driver\ConnectionInterface');
+        $connectionMock = \Mockery::mock(ConnectionInterface::class);
         $connectionMock->shouldReceive('beginTransaction');
         $connectionMock->shouldReceive('commit')
                        ->once();
@@ -55,8 +59,8 @@ class AdapterTest
         $transaction->commit();        
     }
     
-    public function testRoolBackTransaction() {
-        $connectionMock = \Mockery::mock('\Zend\Db\Adapter\Driver\ConnectionInterface');
+    public function testRollBackTransaction() {
+        $connectionMock = \Mockery::mock(ConnectionInterface::class);
         $connectionMock->shouldReceive('beginTransaction');
         $connectionMock->shouldReceive('rollback')
                        ->once();

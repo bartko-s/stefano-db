@@ -2,6 +2,8 @@
 namespace StefanoDbTest\Unit\Adapter;
 
 use StefanoDb\Adapter\AdapterFactory;
+use StefanoDb\Adapter\ExtendedAdapterInterface;
+use StefanoDb\MultiQuery;
 
 class AdapterFactoryTest
     extends \PHPUnit_Framework_TestCase
@@ -14,7 +16,7 @@ class AdapterFactoryTest
 
         $adapterFactory = new AdapterFactory();
 
-        $this->assertInstanceOf('\StefanoDb\Adapter\ExtendedAdapterInterface',
+        $this->assertInstanceOf(ExtendedAdapterInterface::class,
             $adapterFactory->create($adapterConfig));
     }
 
@@ -27,7 +29,7 @@ class AdapterFactoryTest
             ),
         );
 
-        $multiQueryMock = \Mockery::mock('\StefanoDb\MultiQuery');
+        $multiQueryMock = \Mockery::mock(MultiQuery::class);
         $multiQueryMock->shouldReceive('execute')
                        ->with(\Mockery::any(), $adapterConfig['sqls'])
                        ->once();

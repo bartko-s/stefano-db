@@ -1,20 +1,23 @@
 <?php
 namespace StefanoDbTest\Integration\Service;
 
+use StefanoDb\Adapter\ExtendedAdapterInterface;
+use StefanoDb\Adapter\Service\AdapterServiceFactory;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 
 class AdapterServiceFactoryTest
     extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @var \Zend\ServiceManager\ServiceLocatorInterface
+    * @var ServiceLocatorInterface
     */
     private $serviceManager;
 
     protected function setUp() {
         $this->serviceManager = new ServiceManager(array(
             'factories' => array(
-                'DbAdapter' => '\StefanoDb\Adapter\Service\AdapterServiceFactory'),
+                'DbAdapter' => AdapterServiceFactory::class),
         ));
 
         $this->serviceManager->setService('Config', array(
@@ -28,7 +31,7 @@ class AdapterServiceFactoryTest
     public function testCreateDbAdapter() {
         $sm = $this->serviceManager;
 
-        $this->assertInstanceOf('\StefanoDb\Adapter\ExtendedAdapterInterface',
+        $this->assertInstanceOf(ExtendedAdapterInterface::class,
             $sm->get('DbAdapter'));
     }
 }

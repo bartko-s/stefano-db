@@ -1,6 +1,7 @@
 <?php
 namespace StefanoDbTest\Unit;
 
+use StefanoDb\Adapter\Adapter as DbAdapter;
 use StefanoDb\MultiQuery;
 
 class MultiQueryTest
@@ -12,13 +13,13 @@ class MultiQueryTest
             'secound query',
         );
 
-        $adapterMock = \Mockery::mock('\StefanoDb\Adapter\Adapter');
+        $adapterMock = \Mockery::mock(DbAdapter::class);
         $adapterMock->shouldReceive('query')
-                    ->with($queries[0], \StefanoDb\Adapter\Adapter::QUERY_MODE_EXECUTE)
+                    ->with($queries[0], DbAdapter::QUERY_MODE_EXECUTE)
                     ->once()
                     ->ordered();
         $adapterMock->shouldReceive('query')
-                    ->with($queries[1], \StefanoDb\Adapter\Adapter::QUERY_MODE_EXECUTE)
+                    ->with($queries[1], DbAdapter::QUERY_MODE_EXECUTE)
                     ->once()
                     ->ordered();
 

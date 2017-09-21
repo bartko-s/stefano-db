@@ -2,18 +2,22 @@
 namespace StefanoDbTest\Unit\Adapter;
 
 use StefanoDb\Adapter\Adapter;
+use StefanoDb\Adapter\ExtendedAdapterInterface;
+use StefanoDb\Transaction\Adapter as TransactionAdapter;
 use StefanoNestedTransaction\TransactionManager;
+use StefanoNestedTransaction\TransactionManagerInterface;
+use Zend\Db\Adapter\Driver\Pdo\Pdo;
 
 class AdapterTest
     extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \StefanoDb\Adapter\Adapter
+     * @var Adapter
      */
     protected $adapter;
 
     protected function setUp() {
-        $driverStub = \Mockery::mock('\Zend\Db\Adapter\Driver\Pdo\Pdo');
+        $driverStub = \Mockery::mock(Pdo::class);
         $driverStub->shouldReceive('getDatabasePlatformName')
                    ->andReturn('Mysql');
         $driverStub->shouldReceive('checkEnvironment')
@@ -27,11 +31,11 @@ class AdapterTest
     }
 
     public function testImplementsExtendedAdapterInterface() {
-        $this->assertInstanceOf('\StefanoDb\Adapter\ExtendedAdapterInterface', $this->adapter);
+        $this->assertInstanceOf(ExtendedAdapterInterface::class, $this->adapter);
     }
 
     public function testSetGetTransaction() {
-        $transactionStub = \Mockery::mock('\StefanoDb\Transaction\Adapter');
+        $transactionStub = \Mockery::mock(TransactionAdapter::class);
 
         $transaction = new TransactionManager($transactionStub);
 
@@ -42,13 +46,13 @@ class AdapterTest
 
     public function testLazyLoadedTransaction() {
         $dbAdapter = $this->adapter;
-        $this->assertInstanceOf('\StefanoNestedTransaction\TransactionManagerInterface',
+        $this->assertInstanceOf(TransactionManagerInterface::class,
                 $dbAdapter->getTransaction());
         $this->assertSame($dbAdapter->getTransaction(), $dbAdapter->getTransaction()); //return same object
     }
 
     public function testBeginTransaction() {
-        $transactionManagerMock = \Mockery::mock('\StefanoNestedTransaction\TransactionManager');
+        $transactionManagerMock = \Mockery::mock(TransactionManager::class);
         $transactionManagerMock->shouldReceive('begin')
                                ->once();
 
@@ -59,7 +63,7 @@ class AdapterTest
     }
 
     public function testCommitTransaction() {
-        $transactionManagerMock = \Mockery::mock('\StefanoNestedTransaction\TransactionManager');
+        $transactionManagerMock = \Mockery::mock(TransactionManager::class);
         $transactionManagerMock->shouldReceive('commit')
                                ->once();
 
@@ -70,7 +74,7 @@ class AdapterTest
     }
 
     public function testRollbackTransaction() {
-        $transactionManagerMock = \Mockery::mock('\StefanoNestedTransaction\TransactionManager');
+        $transactionManagerMock = \Mockery::mock(TransactionManager::class);
         $transactionManagerMock->shouldReceive('rollback')
                                ->once();
 
