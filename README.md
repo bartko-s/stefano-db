@@ -1,5 +1,7 @@
-Stefano Db
-===================
+[DEPRECATED] Stefano Db
+=======================
+
+Zend DB from [v.2.4.0](https://github.com/zendframework/zend-db/releases/tag/release-2.4.0) support nested transactions. Please use [Zend Db](https://github.com/zendframework/zend-db/) instead of this library. This library is NOT MAINTAINED anymore.
 
 | Test Status | Code Coverage | Dependencies |
 | :---: | :---: | :---: |
