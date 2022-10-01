@@ -3,11 +3,10 @@
 
 Zend DB from [v.2.4.0](https://github.com/zendframework/zend-db/releases/tag/release-2.4.0) support nested transactions. Please use [Zend Db](https://github.com/zendframework/zend-db/) instead of this library. This library is NOT MAINTAINED anymore.
 
-| Test Status | Code Coverage | Dependencies |
-| :---: | :---: | :---: |
-| [![Test Status](https://secure.travis-ci.org/bartko-s/stefano-db.png?branch=master)](https://travis-ci.org/bartko-s/stefano-db) | [![Code Coverege](https://coveralls.io/repos/bartko-s/stefano-db/badge.png?branch=master)](https://coveralls.io/r/bartko-s/stefano-db?branch=master) | [![Dependencies](https://www.versioneye.com/user/projects/51bc294809732f0002004f51/badge.png)](https://www.versioneye.com/user/projects/51bc294809732f0002004f51) |
+[![Build Status](https://app.travis-ci.com/bartko-s/stefano-db.svg?branch=master)](https://app.travis-ci.com/bartko-s/stefano-db)
+[![Code Coverege](https://coveralls.io/repos/bartko-s/stefano-db/badge.png?branch=master)](https://coveralls.io/r/bartko-s/stefano-db?branch=master)
 
-Instalation using Composer
+Installation using Composer
 --------------------------
 1. Run command  ``` composer require stefano/stefano-db ```
 

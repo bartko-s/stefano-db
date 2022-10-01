@@ -15,7 +15,7 @@ class AdapterServiceFactoryTest
     */
     private $serviceManager;
 
-    protected function setUp() {
+    protected function setUp(): void {
         $this->serviceManager = new ServiceManager(array(
             'factories' => array(
                 'DbAdapter' => AdapterServiceFactory::class),

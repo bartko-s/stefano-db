@@ -17,7 +17,7 @@ class AdapterTest
      */
     protected $adapter;
 
-    protected function setUp() {
+    protected function setUp(): void {
         $driverStub = \Mockery::mock(Pdo::class);
         $driverStub->shouldReceive('getDatabasePlatformName')
                    ->andReturn('Mysql');
@@ -27,7 +27,7 @@ class AdapterTest
         $this->adapter = new Adapter($driverStub);
     }
 
-    protected function tearDown() {
+    protected function tearDown(): void {
         $this->adapter = null;
     }
 
